@@ -39,7 +39,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.bogdash.stepikcourse.ui.theme.InstagramProfileCard
+import com.bogdash.stepikcourse.ui.theme.PostCard
 import com.bogdash.stepikcourse.ui.theme.StepikCourseTheme
 
 class MainActivity : ComponentActivity() {
@@ -47,39 +47,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            StepikCourseTheme {
+            StepikCourseTheme(dynamicColor = false) {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
                         .background(MaterialTheme.colorScheme.background)
+                        .padding(8.dp)
                 ) {
-                    InstagramProfileCard()
+                    PostCard()
                 }
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun TestText() {
-    Box(
-        modifier = Modifier
-            .size(200.dp)
-            .background(Color.Cyan)
-    ) {
-        Image(
-            modifier = Modifier
-                .background(Color.Green)
-                .padding(25.dp)
-                .size(100.dp)
-                .background(Color.Red)
-                .padding(25.dp)
-            ,
-            painter = ColorPainter(Color.Yellow),
-            contentDescription = null,
-            contentScale = ContentScale.FillHeight
-        )
-    }
-
 }
