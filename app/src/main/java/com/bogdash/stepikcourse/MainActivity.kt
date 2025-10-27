@@ -4,59 +4,92 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.painter.ColorPainter
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.bogdash.stepikcourse.ui.theme.PostCard
-import com.bogdash.stepikcourse.ui.theme.StepikCourseTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            StepikCourseTheme(dynamicColor = false) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.background)
-                        .padding(8.dp)
-                ) {
-                    PostCard()
-                }
-            }
+            Test()
         }
     }
+}
+
+@Composable
+private fun ColumnScope.TestText(count: Int, text: String) {
+    repeat(count) {
+        Text(
+            modifier = Modifier.weight(1f),
+            text = text
+        )
+    }
+}
+
+@Composable
+private fun Test() {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Example3()
+    }
+}
+
+@Composable
+private fun Example1() {
+    OutlinedButton(
+        onClick = {}
+    ) {
+        Text(text = "Hello world")
+    }
+}
+
+@Composable
+private fun Example2() {
+    TextField(
+        value = "",
+        onValueChange = {},
+        label = { Text(text = "Label") }
+    )
+}
+
+@Composable
+private fun Example3() {
+    AlertDialog(
+        onDismissRequest = {},
+        confirmButton = {
+            Text(
+                modifier = Modifier.padding(8.dp),
+                text = "Yes"
+            )
+        },
+        title = {
+            Text(
+                text = "Are you sure?"
+            )
+        },
+        text = {
+            Text(
+                text = "Do you want to delete this file?"
+            )
+        },
+        dismissButton = {
+            Text(
+                modifier = Modifier.padding(8.dp),
+                text = "No"
+            )
+        }
+    )
 }
