@@ -29,115 +29,22 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
+import com.bogdash.stepikcourse.ui.theme.InstagramProfileCard
 import com.bogdash.stepikcourse.ui.theme.StepikCourseTheme
 import com.bogdash.stepikcourse.ui.theme.VkNewsMainScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         enableEdgeToEdge()
         setContent {
             StepikCourseTheme {
-                VkNewsMainScreen()
+                InstagramProfileCard(
+                    viewModel = viewModel
+                )
             }
         }
     }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-private fun Test() {
-    ModalNavigationDrawer(
-        drawerContent = {
-            ModalDrawerSheet {
-                NavigationDrawerItem(
-                    label = {
-                        Text(" Text 1")
-                    },
-                    selected = true,
-                    onClick = {},
-                    icon = {
-                        Icon(Icons.Filled.Call, null)
-                    }
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                NavigationDrawerItem(
-                    label = {
-                        Text(" Text 2")
-                    },
-                    selected = false,
-                    onClick = {},
-                    icon = {
-                        Icon(Icons.Filled.Build, null)
-                    }
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                NavigationDrawerItem(
-                    label = {
-                        Text(" Text 3")
-                    },
-                    selected = false,
-                    onClick = {},
-                    icon = {
-                        Icon(Icons.Filled.AccountCircle, null)
-                    }
-                )
-            }
-        }
-    ) {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = {
-                        Text( text = "TopAppBarTitle" )
-                    },
-                    navigationIcon = {
-                        IconButton(onClick = {}) {
-                            Icon(Icons.Filled.Menu, contentDescription = null)
-                        }
-                    }
-                )
-            },
-            bottomBar = {
-                NavigationBar {
-                    NavigationBarItem(
-                        selected = true,
-                        onClick = {},
-                        icon = {
-                            Icon(Icons.Filled.Favorite, contentDescription = null)
-                        },
-                        label = {
-                            Text("Favorite")
-                        }
-                    )
-                    NavigationBarItem(
-                        selected = false,
-                        onClick = {},
-                        icon = {
-                            Icon(Icons.Outlined.Edit, contentDescription = null)
-                        },
-                        label = {
-                            Text("Edit")
-                        }
-                    )
-                    NavigationBarItem(
-                        selected = false,
-                        onClick = {},
-                        icon = {
-                            Icon(Icons.Outlined.Delete, contentDescription = null)
-                        },
-                        label = {
-                            Text("Delete")
-                        }
-                    )
-                }
-            }
-        ) {
-            Text(
-                modifier = Modifier.padding(it),
-                text = "This is scaffold content"
-            )
-        }
-    }
-
 }

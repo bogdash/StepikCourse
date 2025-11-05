@@ -1,5 +1,6 @@
 package com.bogdash.stepikcourse.ui.theme
 
+import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -29,7 +30,9 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun VkNewsMainScreen() {
-    val snackbarHostState = SnackbarHostState()
+    val snackbarHostState = remember { SnackbarHostState() }
+    Log.d("Main Screen", snackbarHostState.currentSnackbarData.toString())
+
     val scope = rememberCoroutineScope()
     val fabIsVisible = remember { mutableStateOf(true) }
 
