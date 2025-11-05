@@ -29,13 +29,17 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.bogdash.stepikcourse.ui.theme.StepikCourseTheme
+import com.bogdash.stepikcourse.ui.theme.VkNewsMainScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Test()
+            StepikCourseTheme {
+                VkNewsMainScreen()
+            }
         }
     }
 }
