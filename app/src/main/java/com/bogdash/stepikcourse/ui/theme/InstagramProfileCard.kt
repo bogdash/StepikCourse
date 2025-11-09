@@ -1,6 +1,6 @@
 package com.bogdash.stepikcourse.ui.theme
 
-import android.content.res.Configuration
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,18 +14,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,7 +30,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bogdash.stepikcourse.MainViewModel
@@ -44,6 +39,7 @@ import com.bogdash.stepikcourse.R
 fun InstagramProfileCard(
     viewModel: MainViewModel
 ) {
+    Log.d("RECOMPOSITION", "InstagramProfileCard")
     val isFollowed = viewModel.isFollowing.collectAsState(false)
 
     Card(
@@ -54,6 +50,7 @@ fun InstagramProfileCard(
         ),
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.onBackground)
     ) {
+        Log.d("RECOMPOSITION", "Card")
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
@@ -100,7 +97,7 @@ fun InstagramProfileCard(
                 fontSize = 14.sp
             )
             FollowButton(
-                isFollowed = isFollowed.value
+                isFollowed = isFollowed
             ) { viewModel.changeFollowingStatus() }
         }
     }
@@ -108,20 +105,21 @@ fun InstagramProfileCard(
 
 @Composable
 private fun FollowButton(
-    isFollowed: Boolean,
+    isFollowed: State<Boolean>,
     clickListener: () -> Unit
 ) {
+    Log.d("RECOMPOSITION", "FollowButton")
     Button(
         onClick = { clickListener() },
         colors = ButtonDefaults.buttonColors(
-            containerColor = if (isFollowed) {
+            containerColor = if (isFollowed.value) {
                 MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
             } else {
                 MaterialTheme.colorScheme.primary
             }
         )
     ) {
-        val text = if (isFollowed) "Unfollow" else "Follow"
+        val text = if (isFollowed.value) "Unfollow" else "Follow"
         Text(
             text = text
         )
