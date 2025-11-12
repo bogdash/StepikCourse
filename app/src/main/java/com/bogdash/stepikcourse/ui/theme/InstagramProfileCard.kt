@@ -32,12 +32,12 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.bogdash.stepikcourse.MainViewModel
+import com.bogdash.stepikcourse.InstagramViewModel
 import com.bogdash.stepikcourse.R
 
 @Composable
 fun InstagramProfileCard(
-    viewModel: MainViewModel
+    viewModel: InstagramViewModel
 ) {
     Log.d("RECOMPOSITION", "InstagramProfileCard")
     val isFollowed = viewModel.isFollowing.collectAsState(false)

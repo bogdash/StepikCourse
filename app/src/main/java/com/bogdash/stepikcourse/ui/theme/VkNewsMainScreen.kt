@@ -9,6 +9,7 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -16,10 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.bogdash.stepikcourse.NavigationItem
+import com.bogdash.stepikcourse.VkNewsViewModel
 import com.bogdash.stepikcourse.domain.FeedPost
 
 @Composable
-fun VkNewsMainScreen() {
+fun VkNewsMainScreen(
+    viewModel: VkNewsViewModel
+) {
     val feedPost = remember {
         mutableStateOf(FeedPost())
     }
@@ -57,24 +61,13 @@ fun VkNewsMainScreen() {
             }
         }
     ) {
+        val feedPost = viewModel.feedPost.observeAsState(FeedPost())
         PostCard(
             modifier = Modifier
                 .padding(it)
                 .padding(8.dp),
             feedPost = feedPost.value,
-            onStatisticsItemClickListener = { newItem ->
-                val oldStatistics = feedPost.value.statistics
-                val newStatistics = oldStatistics.toMutableList().apply {
-                    replaceAll { oldItem ->
-                        if (oldItem.type == newItem.type) {
-                            oldItem.copy(count = oldItem.count + 1)
-                        } else {
-                            oldItem
-                        }
-                    }
-                }
-                feedPost.value = feedPost.value.copy(statistics = newStatistics)
-            }
+            onStatisticsItemClickListener = viewModel::updateCount
         )
     }
 }
