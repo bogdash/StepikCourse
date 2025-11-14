@@ -4,11 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Text
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.painterResource
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.ViewModelProvider
 import com.bogdash.stepikcourse.ui.theme.InstagramProfileCard
 import com.bogdash.stepikcourse.ui.theme.StepikCourseTheme
@@ -33,21 +32,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun Test(viewModel: InstagramViewModel) {
     StepikCourseTheme {
+        val models = viewModel.models.observeAsState(listOf())
         LazyColumn {
-            item {
-                Text(text = "Title")
-            }
-            items(10) {
+            items(models.value) { model ->
                 InstagramProfileCard(
-                    viewModel = viewModel
-                )
-            }
-            item {
-                Image(painter = painterResource(id = R.drawable.ic_instagram), contentDescription = null)
-            }
-            items(500) {
-                InstagramProfileCard(
-                    viewModel = viewModel
+                    model = model,
+                    onFollowedButtonClickListener = viewModel::changeFollowingStatus
                 )
             }
         }
