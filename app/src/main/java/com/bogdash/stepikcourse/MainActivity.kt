@@ -23,22 +23,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
-import com.bogdash.stepikcourse.ui.theme.InstagramProfileCard
 import com.bogdash.stepikcourse.ui.theme.StepikCourseTheme
+import com.bogdash.stepikcourse.ui.views.InstagramProfileCard
 
 class MainActivity : ComponentActivity() {
-//    private val viewModel by viewModels<VkNewsViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val viewModel = ViewModelProvider(this)[InstagramViewModel::class.java]
         enableEdgeToEdge()
         setContent {
             Test(viewModel = viewModel)
-//            StepikCourseTheme {
-//                VkNewsMainScreen(
-//                    viewModel = viewModel
-//                )
-//            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.bogdash.stepikcourse.ui.theme
+package com.bogdash.stepikcourse.ui.views
 
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
